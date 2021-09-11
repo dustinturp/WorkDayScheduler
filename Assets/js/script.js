@@ -32,6 +32,7 @@ const createTimeStripBoxEl = function(i) {
     let timeBox = document.createElement("div");
     let timeText = document.createElement("h3");
     let saveIcon = document.createElement("img")
+    currentHour = dayjs().hour()
 
     //time strip container //add counter
     timeStripContainer.classList.add("row", "time-block");
@@ -49,6 +50,17 @@ const createTimeStripBoxEl = function(i) {
     //text box
     textBox.classList.add("textarea","col-10");//.setAttribute("col-4" )
     textBox.setAttribute("id", "txtBox"+i)
+    console.log(i);
+    if (currentHour > i) {
+        //set text box to attribute past
+        textBox.classList.add("past")
+    }
+    if (currentHour === i) {
+        textBox.classList.add("present")
+    }
+    if (currentHour < i) {
+        textBox.classList.add("future")
+    }
     timeStripContainer.appendChild(textBox);
 
 
@@ -73,9 +85,27 @@ const createDay = function() {
     for(let i = 9; i < 18; i++) {
         createTimeStripBoxEl(i);
     }
+
 }
 createDay();
+// updateTimeStrips();
 
-// createTimeStripBoxEl();
+//use css past present future to update style based on time
+// const updateTimeStrips = function() {
+//     currentHour = dayjs().hour()
+//     // setHour = 
+//     if (currentHour < i) {
+//         //set text box to attribute past
+//         textBox.classList.add("past")
+//     }
+//     if (currentHour === i) {
+//         textBox.classList.add("present")
+//     }
+//     if (currentHour > i) {
+//         textBox.classList.add("future")
+//     }
+    
+// }
 
+ console.log(dayjs().hour())
 });
