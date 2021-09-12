@@ -7,7 +7,7 @@ const dateTimeEl = document.querySelector("#currentDay");
 let textBoxPlacement = document.getElementById("container");
 
 //load items from local storage into variable 
-timeSlots = JSON.parse(localStorage.getItem("timeSlots")) || [];
+timeSlots = JSON.parse(localStorage.getItem("timeSlot")) || [];
 
 
 //show current day
@@ -72,15 +72,16 @@ const createTimeStripBoxEl = function(i) {
     $(saveButtonEl).click(function(){
         let timeSlot = $('#txtBox'+i).val().trim();
         // console.log(timeSlot)
-        // let timeSlotEl = document.getElementById("#txtBox"+i);
-        // let timeSlotKey = $('#textBox'+i);
-        // let timeSlotKey = $(timeSlotEl).attr("id");
-        // console.log(timeSlotKey);
-        timeSlots.push(timeSlot);
-        // console.log(timeSlots);
-        localStorage.setItem("txtBox"+i,JSON.stringify(timeSlots));
-        //loop id counter
+        if (timeSlot !== "" || undefined) {
+            timeSlots.push("txtBox"+i + " " + timeSlot);
+            // timeSlots.push(timeSlot);
+            console.log(timeSlots);
+            localStorage.setItem("timeSlot",JSON.stringify(timeSlots));
+        } else {
+            console.log("blank")
+        }
     })
+
     timeStripContainer.appendChild(saveButtonEl);
     //save button icon
     saveIcon.classList.add("saveBtn");
@@ -92,28 +93,20 @@ const createTimeStripBoxEl = function(i) {
 //load tasks
 const loadSavedTimeSlots = function(){
     //load keys and link text to the page.
-
-    for (i = 0; i < timeSlots.length; i++) {
+    console.log(timeSlots)
+    for (i = 0; i < timeSlots.length; i++) { 
         //pull key from table
-        let timeSlotKey = $([i].key);
+        let timeSlotArr = timeSlots[i].split(" ")
+        let timeSlotKey = timeSlotArr[0];
         console.log(timeSlotKey)
-        timeSlot.text(timeSlots[i]); 
-        // pull text from table
-
+        let timeSlotText = timeSlotArr[1]; 
+        console.log(timeSlotText)
+        if (timeSlotText !== "" || undefined){
+            console.log("not Blank")
+        }
         //update page with text from matching key
     }
-
-    //if nothing in local storage create array
-    //need text and id saved per pair
-    if(!timeSlots) {
-        timeSlots = {
-            textArea: []
-        };
-    }
-
-    //loop over obj properties
-    $.each
-}
+};
 
 //save to local storage on save button click 
     // on click append text content of text box to TmeSlots array with id.
@@ -129,6 +122,6 @@ const createDay = function() {
 //create 9am - 5pm time blocks
 createDay();
 //render timeslots on page load 
-// loadSavedTimeSlots();
+loadSavedTimeSlots();
 
 });
