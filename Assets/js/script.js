@@ -98,9 +98,10 @@ const loadSavedTimeSlots = function(){
         //pull key from table
         let timeSlotArr = timeSlots[i].split(" ")
         let timeSlotKey = timeSlotArr[0];
-        console.log(timeSlotKey)
+        // console.log(timeSlotKey)
         let timeSlotText = timeSlotArr[1]; 
-        console.log(timeSlotText)
+        // console.log(timeSlotText)
+        $("#" + timeSlotKey).append(timeSlotText); 
         if (timeSlotText !== "" || undefined){
             console.log("not Blank")
         }
