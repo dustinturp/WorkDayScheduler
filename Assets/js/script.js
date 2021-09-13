@@ -41,16 +41,25 @@ const createTimeStripBoxEl = function(i) {
     textBoxPlacement.appendChild(timeStripContainer);
 
     //timeBox
-    timeBox.classList.add("hour","col-1")
+    timeBox.classList.add("hour","col-2")
     // set to time from 9am to 5pm.
     timeStripContainer.appendChild(timeBox);
     //time number
     timeText.classList.add("hour", "text-align-center")
-    timeText.textContent = i;
-    timeBox.appendChild(timeText);
+    if (i < 12) {
+        timeText.textContent = i + "AM";
+        timeBox.appendChild(timeText);
+    } else  if (i === 12) {
+        timeText.textContent = 12 + "PM";
+        timeBox.appendChild(timeText);
+    } else  if (i > 12) {
+        timeText.textContent = i - 12 + "PM";
+        timeBox.appendChild(timeText);
+    }
+
 
     //text box
-    textBox.classList.add("textarea","col-10");//.setAttribute("col-4" )
+    textBox.classList.add("textarea","col-9");//.setAttribute("col-4" )
     textBox.setAttribute("id", "txtBox"+i)
     // console.log(i);
     if (currentHour > i) {
